@@ -1,0 +1,15 @@
+spring:
+
+  cloud:
+    consul:
+      host: <consul_hostname>
+      port: <consul_port>
+      discovery:
+        register: true
+      config:
+        enabled: false
+      token: "<CONSUL_TOKEN>"
+
+  jpa:
+    hibernate:
+      ddl-auto=update: false

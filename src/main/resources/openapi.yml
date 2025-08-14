@@ -1,0 +1,57 @@
+openapi:
+  swagger:
+    apiInfo:
+      title: Generic Model Service
+      description: >
+        Provides CRUD services for lookup models like Categories, UOM, Sessions, Customers, Vendors & etc..
+      version: 0.0.1
+      contactName: Sivaraman R
+      contactEmail: sivainf@gmail.com
+      genericModel:
+        name: Generic Model
+        create:
+          summary: Create
+          example:
+            request: Category,FoodType,RecipeGroup,Session,UOM,Country,BillableItem,Property,Setting
+            requestDetails:
+              Category: >
+                {"name":"Provisions","genericType":"CATEGORY","value":"PRO","createdBy":"admin",
+                 "description":"i.e: Spices, Legumes, Pulses, Grains, Flours, Oils, Nuts, Dry Fruits & etc.",
+                 "isActive":true,"sortOrder":10,"type":"String"}
+              FoodType: >
+                {"name":"Veg","genericType":"FOOD_TYPE","value":"Veg","createdBy":"admin",
+                 "description":"Vegetarian Food","isActive":true,"sortOrder":10,"type":"String"}
+              RecipeGroup: >
+                {"name":"Biryani","genericType":"RECIPE_GROUP","value":"BIRY","createdBy":"admin",
+                 "description":"A fragrant rice dish made with spices, rice, and meat or vegetables.",
+                 "isActive":true,"sortOrder":10,"type":"String"}
+              Session: >
+                {"name":"Lunch","genericType":"SESSION","value":":UN","createdBy":"admin",
+                 "description":"Lunch","isActive":true,"sortOrder":30,"type":"String"}
+              UOM: >
+                {"name":"KG","genericType":"UOM","value":"KG","createdBy":"admin",
+                 "description":"Kilogram","isActive":true,"sortOrder":10,"type":"String"}
+              Country: >
+                {"name":"India","genericType":"COUNTRY","value":"IN","createdBy":"admin",
+                 "description":"India","isActive":true,"sortOrder":10,"type":"String"}
+              BillableItem: >
+                {"name":"Standard Breakfast","genericType":"BILLABLE_ITEM","value":"Standard_Breakfast",
+                 "createdBy":"admin","description":"Standard Breakfast","isActive":true,"sortOrder":10,"type":"String"}
+              Property: >
+                {"name":"displayDateFormat","genericType":"PROPERTY","value":"dd/mm/yyyy",
+                 "createdBy":"admin","description":"Display date format","isActive":true,"sortOrder":10,"type":"String"}
+              Setting: >
+                {"name":"currencyCode","genericType":"SETTING","value":"INR","createdBy":"admin",
+                 "description":"Currency code","isActive":true,"sortOrder":10,"type":"String"}
+
+    server:
+      localhost:
+        url: http://localhost:9090
+        description: Localhost
+      dev:
+        url: https://api.cookerp.com
+        description: DEV
+
+    oauth2:
+      token:
+        url: https://auth.cookerp.com/realms/Test/protocol/openid-connect/token
