@@ -3,7 +3,6 @@ package io.github.sivaramanr.genericmodel.service;
 import io.github.sivaramanr.common.GenericModelTranslationBean;
 import org.springframework.data.domain.Page;
 
-import java.util.Locale;
 import java.util.Optional;
 
 public interface GenericModelTranslationService {

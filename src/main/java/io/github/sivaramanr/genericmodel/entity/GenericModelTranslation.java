@@ -1,6 +1,5 @@
 package io.github.sivaramanr.genericmodel.entity;
 
-import io.github.sivaramanr.genericmodel.converter.LocaleConverter;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;

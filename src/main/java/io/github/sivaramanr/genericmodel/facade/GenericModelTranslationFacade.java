@@ -3,7 +3,6 @@ package io.github.sivaramanr.genericmodel.facade;
 import io.github.sivaramanr.common.GenericModelTranslationBean;
 import org.springframework.data.domain.Page;
 
-import java.util.Locale;
 import java.util.Optional;
 
 public interface GenericModelTranslationFacade {
