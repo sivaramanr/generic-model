@@ -6,3 +6,12 @@ spring:
 
   config:
     import: "openapi.yml"
+
+  jpa:
+    open-in-view: false
+
+genericmodel:
+  api:
+    default-page: 0
+    default-page-size: 10
+    max-page-size: 50

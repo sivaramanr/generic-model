@@ -1,27 +1,25 @@
 package io.github.sivaramanr.genericmodel.entity;
 
-import io.github.sivaramanr.genericmodel.converter.LocaleConverter;
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Index;
+import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
 
-import java.util.Locale;
-
+@Getter
+@Setter
 @Entity
-@Table(name = "generic_model_name_translation")
-public class GenericModelNameTranslation {
+@Table(
+    name = "generic_model_name_translation",
+    indexes = {
+        @Index(name = "idx_name_translation_generic_model_id_locale", columnList = "generic_model_id, id"),
+        @Index(name = "idx_name_translation_generic_model_id", columnList = "generic_model_id")
+    }
+)
+public class GenericModelNameTranslation extends GenericModelTranslation {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Convert(converter = LocaleConverter.class)
-    @Column(name = "language", length = 20)
-    private Locale language;
-
-    @Column(name = "name", nullable = false, length = 255)
+    @Column(name = "name", length = 500)
     private String name;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "generic_model_id")
-    private GenericModel genericModel;
 
 }

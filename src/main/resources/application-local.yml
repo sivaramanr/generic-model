@@ -11,9 +11,14 @@ spring:
       token: "d8093229-2738-2ce7-5355-936fb1c34322"
 
   datasource:
-    url: jdbc:mysql://localhost:3306/cookplan
-    username: root
-    password: dictionary
+#    url: jdbc:mysql://localhost:3306/cookplan
+#    username: root
+#    password: dictionary
+    url: jdbc:h2:file:./data/cookplan
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: password
+    database-platform: org.hibernate.dialect.H2Dialect
 
   jpa:
     hibernate:

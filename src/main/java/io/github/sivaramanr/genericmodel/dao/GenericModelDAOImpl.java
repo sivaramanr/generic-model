@@ -2,6 +2,7 @@ package io.github.sivaramanr.genericmodel.dao;
 
 import io.github.sivaramanr.common.GenericModelBean;
 import io.github.sivaramanr.common.types.GenericType;
+import io.github.sivaramanr.common.types.StatusType;
 import io.github.sivaramanr.genericmodel.entity.GenericModel;
 import io.github.sivaramanr.genericmodel.repository.GenericModelRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -13,25 +14,14 @@ import org.springframework.stereotype.Component;
 import java.util.Optional;
 
 import static java.util.Optional.ofNullable;
+import static org.springframework.data.jpa.domain.Specification.where;
 
 @Slf4j
 @Component
-public class DefaultGenericModelDAO implements GenericModelDAO {
+public class GenericModelDAOImpl implements GenericModelDAO {
 
     @Autowired
     private GenericModelRepository genericModelRepository;
-
-    @Override
-    public Page<GenericModel> getGenericModels(String tenentId, GenericType genericType, Integer page, Integer size) {
-        final PageRequest pageRequest = PageRequest.of(page, size);
-
-        return genericModelRepository.findAllByTenantIdAndGenericType(tenentId, genericType, pageRequest);
-    }
-
-    @Override
-    public Optional<GenericModel> getGenericModel(String tenantId, String id) {
-        return genericModelRepository.findActiveByTenantIdAndId(tenantId, id);
-    }
 
     @Override
     public String createGenericModel(String tenantId, GenericModelBean genericModelBean, String createdBy) {
@@ -78,6 +68,30 @@ public class DefaultGenericModelDAO implements GenericModelDAO {
             genericModelRepository.save(genericModel);
             log.debug("Soft-deleted GenericModel with ID: {}", id);
         });
+    }
+
+    @Override
+    public Optional<GenericModel> getGenericModel(String tenantId, String id) {
+        return genericModelRepository.findActiveByTenantIdAndId(tenantId, id);
+    }
+
+    @Override
+    public Page<GenericModel> getGenericModels(String tenentId, GenericType genericType, Integer page, Integer size) {
+        final PageRequest pageRequest = PageRequest.of(page, size);
+        return genericModelRepository.findAllByTenantIdAndGenericType(tenentId, genericType, pageRequest);
+    }
+
+    @Override
+    public Page<GenericModel> searchGenericModel(String tenantId, String name, GenericType type, StatusType status) {
+        final PageRequest pageRequest = PageRequest.of(1, 2);
+        return genericModelRepository.findAll(
+            where(GenericModelSpecifications.tenantIdEquals(tenantId))
+                .and(GenericModelSpecifications.nameContains(name))
+                .and(GenericModelSpecifications.genericTypeEquals(type))
+                .and(GenericModelSpecifications.statusEquals(status))
+                .and(GenericModelSpecifications.notDeleted()),
+                pageRequest
+        );
     }
 
 }

@@ -6,7 +6,7 @@ import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
 @Component
-public class GenericModelToGenericModelBeanConverter implements Converter<GenericModel, GenericModelBean> {
+public class GenericModelToBeanConverter implements Converter<GenericModel, GenericModelBean> {
 
     @Override
     public GenericModelBean convert(GenericModel genericModel) {

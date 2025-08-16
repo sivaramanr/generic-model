@@ -12,8 +12,12 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
+@Getter
+@Setter
 @Entity
 @Table(
         name = "generic_model",
@@ -22,8 +26,6 @@ import java.util.UUID;
                 @Index(name = "idx_generic_model_id", columnList = "id")
         }
 )
-@Getter
-@Setter
 @NoArgsConstructor
 public class GenericModel {
 
@@ -41,6 +43,7 @@ public class GenericModel {
     @Column(nullable = false, length = 255)
     private String name;
 
+    @Column(name = "generic_value")
     private String value;
 
     @Convert(converter = ValueTypeConverter.class)
@@ -72,6 +75,15 @@ public class GenericModel {
 
     @Column(name = "updated_by")
     private String updatedBy;
+
+    @OneToMany(mappedBy = "genericModel", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<GenericModelNameTranslation> nameTranslations = new ArrayList<>();
+
+    @OneToMany(mappedBy = "genericModel", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<GenericModelValueTranslation> valueTranslations = new ArrayList<>();
+
+    @OneToMany(mappedBy = "genericModel", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<GenericModelDescriptionTranslation> descriptionTranslations = new ArrayList<>();
 
     @PrePersist
     public void prePersist() {
